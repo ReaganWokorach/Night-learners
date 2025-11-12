@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Card</title>
+  <style>
+    body {
+  font-family: "Poppins", sans-serif;
+  background: #f5f6fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.book-card {
+  display: flex;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  overflow: hidden;
+  width: 550px;
+  transition: transform 0.3s;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+}
+
+.book-cover img {
+  width: 200px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-info {
+  padding: 20px;
+  flex: 1;
+}
+
+.book-title {
+  font-size: 20px;
+  color: #2d3436;
+  margin-bottom: 5px;
+}
+
+.book-author {
+  color: #636e72;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.book-category, .book-isbn, .book-copies {
+  color: #555;
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.book-copies span {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.borrow-btn {
+  margin-top: 15px;
+  background: #0984e3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.borrow-btn:hover {
+  background: #075cb0;
+}
+
+  </style>
+</head>
+<body>
+  <div class="book-card">
+    <div class="book-cover">
+      <img src="book-cover.jpg" alt="Book Cover">
+    </div>
+    <div class="book-info">
+      <h2 class="book-title">The Art of Programming</h2>
+      <p class="book-author">by Donald Knuth</p>
+      <p class="book-category">Category: Computer Science</p>
+      <p class="book-isbn"><strong>ISBN:</strong> XXX-XXX-XX</p>
+      <p class="book-copies">Available Copies: <span>N/A</span></p>
+      <button class="borrow-btn">Borrow Book</button>
+    </div>
+  </div>
+</body>
+</html>
