@@ -1,0 +1,151 @@
+body{
+    font-family: Segoe 'Segoe UI', Tahoma, sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+
+body, h1, h3, ul{
+    margin: 0;
+    padding: 0;
+
+}
+
+
+nav{
+  background-color:#033b5c;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav h1{
+  margin-left: 300px;
+}
+
+.wrapper {
+    display: flex;
+}
+
+
+.top-corner {
+    background-color: #033b5c;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.top-corner .username {
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.top-corner .logout-btn {
+    background-color: #6fa8dc;
+    color: #fff;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.top-corner .logout-btn:hover {
+    background-color: #5b91c4; 
+}
+
+.Sidebar{
+  background-color: #033b5c;
+  width: 220px;
+  min-height:100vh;
+  padding: 10px;
+  color: white;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+
+}
+
+
+.TB, .AM, .BB, .TF{
+    width: 200px;
+    height: 150px;
+    border: 2px solid #003b5c;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;    
+    justify-content: center;   
+    align-items: center;       
+    text-align: center;        
+    padding: 10px;
+    gap: 10px; 
+    color: #003b5c; 
+    
+}
+.TB{
+    border-top: solid 5px #013959;
+    cursor: pointer;
+}
+.AM{
+    border-top: solid 5px #005F99;
+    cursor: pointer;
+}
+.BB{
+    border-top: solid 5px #7EC8E3;
+    cursor: pointer;
+}
+.TF{
+    border-top: solid 5px #7EC8E3;
+    cursor: pointer;
+}
+
+.Sidebar ul{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+li{
+    list-style-type: none;
+    margin-bottom: 25px;
+    font-size: larger;
+    cursor: pointer;
+    
+}
+
+.Sidebar ul li a{
+  text-decoration: none;
+  color: white;
+}
+
+@media (max-width: 1220px) {
+  /* .wrapper {
+    flex-direction: column;
+  } */
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .TB, .AM, .BB, .TF {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+    
+}
