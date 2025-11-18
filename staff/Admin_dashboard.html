@@ -18,30 +18,104 @@
     <div class="Sidebar">
         <h1>Admin Panel</h1>
         <ul>
-            <li><a href="#">📊 DashBoard</a></li>
-            <li><a href="#">📚 Books</a></li>
-            <li><a href="#">👥Members</a></li>
-            <li><a href="#">📥 Borrow Requests</a></li>
-            <li><a href="#">💰 Fines</a></li>
+            <li><a href="#" id="dashboardBtn">📊 DashBoard</a></li>
+            <li><a href="#" id="booksBtn">📚 Books</a></li>
+            <li><a href="#" id="membersBtn">👥 Members</a></li>
+            <li><a href="#" id="borrowBtn">📥Borrow Records</a></li>
+            <li><a href="#" id="finesBtn">💰Fines</a></li>
+        </ul>
+        <div class="add_buttons">
+            <button class="add-book-btn" id="Add-bookBtn">Add Book</button>
+            <button class="add-member-btn" id="addmemeberBtn">Add Member</button>
+            <button class="clear-balance" id="clearBalanceBtn">Clear Balance</button>
+        </div>
     </div>
-    <div class="main">
-        <div class="TB">
-            <h3>Total Books</h3> <br>
-            <h3>1</h3>
+    <div class="content-area">
+        <div class="main" id="mainDiv">
+            <div class="TB">
+                <h3>Total Books</h3> <br>
+                <h3>1</h3>
+            </div>
+            <div class="AM">
+                <h3>Active Members</h3><br>
+                <h3>1</h3>
+            </div>
+            <div class="BB">
+                <h3>Borrowed Books</h3><br>
+                <h3>1</h3>
+            </div>
+            <div class="TF">
+                <h3>Total Fines</h3><br>
+                <h3>4</h3>
+            </div>
         </div>
-        <div class="AM">
-            <h3>Active Members</h3><br>
-            <h3>1</h3>
+        <!-- Books Div -->
+        <div class="books" id="booksDiv" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>BOOK ID</th>
+                        <th>ISBN</th>
+                        <th>TITTLE</th>
+                        <th>AUTHOR</th>
+                        <th>CATEGORY</th>
+                        <th>TOTAL COPIES</th>
+                        <th>AVAILABLE COPIES</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
-        <div class="BB">
-            <h3>Borrowed Books</h3><br>
-            <h3>1</h3>
+        <!-- Members Div -->
+        <div class="members" id="membersDiv" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>MEMBER ID</th>
+                        <th>REG NO.</th>
+                        <th>FULL NAME</th>
+                        <th>EMAIL</th>
+                        <th>PHONE NUMBER</th>
+                        <th>STATUS</th>
+                        <th>CREATION DATE</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
-        <div class="TF">
-            <h3>Total Fines</h3><br>
-            <h3>4</h3>
+        <!-- BORROW RECORDS -->
+        <div class="Borrow_records" id="borrowDiv" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th> DEBIT ID</th>
+                        <th>MEMBER ID</th>
+                        <th>BOOKID</th>
+                        <th>BORROWING DATE</th>
+                        <th>EXPECTED DATE</th>
+                        <th>DUE DATE</th>
+                        <th>RETURNED DATE</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <!-- FINES  -->
+        <div class="fines" id="finesDiv" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th> FINE ID</th>
+                                <th>MEMBER ID</th>
+                                <th>BOOK ID</th>
+                                <th>DATE ISSUED</th>
+                                <th>AMOUNT</th>
+                                <th>PAID STATUS</th>
+                                <th>BALANCE</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
         </div>
     </div>
 </div>
+<script src="../assets/css/Admin_dashboard.js"></script>
 </body>
 </html>
