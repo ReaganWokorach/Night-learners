@@ -1,5 +1,5 @@
 body{
-    font-family: Segoe 'Segoe UI', Tahoma, sans-serif;
+    font-family: Segoe UI, sans-serif;
     color: white;
     display: flex;
     flex-direction: column;
@@ -133,7 +133,8 @@ li{
 
 #booksDiv table, #membersDiv table, #borrowDiv table, #finesDiv table {
     width: 100%; 
-    border-collapse: collapse; 
+    border-collapse: collapse;
+    border: none;
     table-layout: auto; 
 }
 
@@ -143,8 +144,8 @@ li{
 }
 
 #booksDiv th, #membersDiv th, #borrowDiv th, #finesDiv th{
-    background-color: #003b5c;
-    color: white;
+    background-color: #fff;
+    color: #003b5c;
     padding: 10px;
     text-align: center;
     border: 1px solid #ddd;
@@ -153,6 +154,10 @@ li{
 .content-area{
     flex: 1;
     padding: 20px;
+    box-shadow: black 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border-color: #005F99;
 }
 
 @media (max-width: 1220px) {
@@ -195,4 +200,12 @@ li{
     font-size: 16px;
     height: 150px;
     /* width: 150px; */
+    font-size: x-large;
+    font-style: bold;
+}
+
+.add_buttons button:hover {
+    background-color: #003b5c;
+    color: white;
+    border: white 2px solid;
 }
