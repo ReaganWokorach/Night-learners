@@ -38,4 +38,9 @@ addEventListener("DOMContentLoaded", function () {
     document.getElementById("finesDiv").style.display = "block";//show fines div
     });
 
+    // display the add book button if the books div is visible
+    if (document.getElementById("booksDiv").style.display === "block") {
+        document.getElementById("Add-bookBtn").style.display = "inline-block";
+    }
+
 });
