@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['username'] = $staff['username'];
                 $_SESSION['role']      = 'staff';
 
-                header("Location: staff/dashboard.php");
+                header("Location: staff/Admin_dashboard.html");
                 exit();
             }else{
                 $error = "Invalid Password";
@@ -60,9 +60,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt2->close();
     }
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
