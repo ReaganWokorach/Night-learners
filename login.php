@@ -8,14 +8,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
+
     if(empty($username) || empty($password)){
         $error = "Please enter both username and password.";
     } else {
         // staff login check 
-
         $stmt = $conn-> prepare("SELECT * FROM staff WHERE username = ?");
         $stmt-> bind_param("s", $username);
         $stmt-> execute();
+
         $staffResult = $stmt->get_result();
 
         if($staffResult->num_rows === 1){
@@ -28,6 +29,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 header("Location: staff/Admin_dashboard.html");
                 exit();
+        }
             }else{
                 $error = "Invalid Password";
             }
@@ -43,7 +45,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($memberResult->num_rows === 1) {
             $member = $memberResult->fetch_assoc();
 
-            if (password_verify($password, $member['password'])) {
+            if(password_verify($password, $member['password']))
+                {
                 $_SESSION['member_id'] = $member['id'];
                 $_SESSION['username'] = $member['username'];
                 $_SESSION['role'] = 'member';
@@ -56,10 +59,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $error = "No user found with that username.";
         }
-
         $stmt2->close();
     }
-}
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
