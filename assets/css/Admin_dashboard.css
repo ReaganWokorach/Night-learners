@@ -66,7 +66,7 @@ nav h1{
   color: white;
 }
 
-.main {
+.main{
   flex: 1;
   padding: 20px;
   display: flex;
@@ -209,3 +209,89 @@ li{
     color: white;
     border: white 2px solid;
 }
+
+.addbook, .addmember, .clearfine {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   
+    align-items: center;       
+    position: absolute;       
+    top: 50%;                  
+    left: 50%;                 
+    transform: translate(-50%, -50%); 
+    background-color: #f9f9f9;
+    color: #003b5c;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    width: 500px; 
+    height: 650px;             
+}
+.addbook input, .addmember input, .clearfine input {
+    width: 60%;                
+    padding: 10px;
+    margin: 10px 0;            
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.addbook h1, .addmember h1, .clearfine h1 {
+    margin-bottom: 20px;
+    font-size: 50px;
+    margin-left: auto;
+}
+
+.addbook label, .addmember label {
+    font-size: 16px;
+
+}
+
+.addbook input, .addmember input, .clearfine input {
+    font-size: 16px;
+    margin-left: 10px;
+}
+.addbook input[type="submit"], .addmember input[type="submit"], 
+.clearfine input[type="submit"], .addbook button, 
+.addmember button, .clearfine button {
+    padding: 10px 20px;
+    background-color: #003b5c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+.addbook input[type="submit"]:hover {
+    background-color: #fff;
+    color: #003b5c;
+    border: #003b5c 2px solid;
+}
+
+
+.clearfine input[type="submit"]:hover {
+    background-color: #fff;
+    color: #003b5c;
+    border: #003b5c 2px solid;
+}
+
+.clearfine label {
+    font-size: 20px;
+
+}
+
+.clearfine{
+    height: 500px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+.buttons button:hover{
+    background-color: #fff;
+    color: #003b5c;
+    border: #003b5c 2px solid;
+}
+
