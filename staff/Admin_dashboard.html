@@ -145,25 +145,29 @@
             <!-- Add Member -->
             <div class="addmember" id="addMemberForm" style="display: none;">
             <h1>Add Member</h1>
-    <form method="POST" action="">
-        <!-- {% csrf_token %} -->
+    <form method="POST" action="../members/add_members.php">
         <label for="reg_no">Registration Number:</label><br>
-        <input type="text" id="reg_no" name="reg_no" required><br><br>
-
+        <input type="text" id="reg_no" name="reg_no" required><br>
         <label for="full_name">Full Name:</label><br>
-        <input type="text" id="full_name" name="full_name" required><br><br>
-
+        <input type="text" id="full_name" name="full_name" required><br>
         <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
-
+        <input type="email" id="email" name="email" required><br>
         <label for="phone_number">Phone Number:</label><br>
-        <input type="text" id="phone_number" name="phone_number" required><br><br>
+        <input type="text" id="phone_number" name="phone_number" required><br>
+        <label for="username" >username</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="Password">Password</label><br>
+        <input type="password" id="password" name="password" required><br>
         <!-- status will be set to active by default but it can be changed -->
         <label for="status">Status</label>
         <select id="status" name="status">
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
-        </select><br><br>
+        </select>
+        <select name="role" id="role">
+            <option value="member">Member</option>
+            <option value="admin">Admin</option>
+        </select><br>
         <input type="submit" value="Add Member"> 
         <button id="addMemberCancelBtn">Cancel</button>
     </form>
