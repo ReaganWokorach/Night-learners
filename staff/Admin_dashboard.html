@@ -34,19 +34,19 @@
         <div class="main" id="mainDiv">
             <div class="TB">
                 <h3>Total Books</h3> <br>
-                <h3>1</h3>
+                <h3 id="totalBookCard">0</h3>
             </div>
             <div class="AM">
                 <h3>Active Members</h3><br>
-                <h3>1</h3>
+                <h3 id="activeMembersCard">0</h3>
             </div>
             <div class="BB">
                 <h3>Borrowed Books</h3><br>
-                <h3>1</h3>
+                <h3 id="borrowedBooksCard">0</h3>
             </div>
             <div class="TF">
-                <h3>Total Fines</h3><br>
-                <h3>4</h3>
+                <h3 id="totalFinesCard">Total Fines</h3><br>
+                <h3>0</h3>
             </div>
         </div>
         <!-- Books Div -->
@@ -61,8 +61,12 @@
                         <th>CATEGORY</th>
                         <th>TOTAL COPIES</th>
                         <th>AVAILABLE COPIES</th>
+                        <th>CREATION DATE</th>
                     </tr>
                 </thead>
+                <tbody id="bookTableBody">
+                    <!-- data from DB -->  
+                </tbody>
             </table>
         </div>
         <!-- Members Div -->

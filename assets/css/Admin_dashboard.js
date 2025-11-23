@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Admin Dashboard JS loaded");
     // Main wrapper and sections
     const wrapper = document.getElementById("wrapper");
     const mainDiv = document.getElementById("mainDiv");
@@ -21,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const addMemberBtn = document.getElementById("addMemberBtn");
     const clearBalanceBtn = document.getElementById("clearBalanceBtn");
     const logoutBtn = document.getElementById("logout");
+    const dashboardBtn = document.getElementById("dashboardBtn");
 
     const addBookCancelBtn = document.getElementById("addBookCancelBtn");
     const addMemberCancelBtn = document.getElementById("addMemberCancelBtn");
@@ -52,15 +52,52 @@ document.addEventListener("DOMContentLoaded", function () {
         if (showClearBalance) clearBalanceBtn.style.display = "inline-block";
     }
 
-    // Section buttons
+
+    // Books button and fetching books logic 
     if (booksBtn) {
         booksBtn.addEventListener("click", function (e) {
             e.preventDefault();
             hideAllSections();
             showSection(booksDiv, true, false, false);
+            // Fetch and display books
+            const bookTableBody = document.getElementById("bookTableBody");
+            bookTableBody.innerHTML = ""; // Clear existing data
+            fetch("/CAT2/Night-learners/staff/books/view_books.php")
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Fetched books:", data);
+                    data.forEach(book => {
+                        console.log("Book:", book);
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${book.id}</td>
+                            <td>${book.isbn}</td>
+                            <td>${book.title}</td>
+                            <td>${book.author}</td>
+                            <td>${book.category}</td>
+                            <td>${book.copies_total}</td>
+                            <td>${book.copies_available}</td>
+                            <td>${book.created_at}</td>
+                        `;
+                        bookTableBody.appendChild(row);
+                    });
+
+                    //calculate and display total books
+                    const totalBooks = data.length;
+                    const totalCopies = data.reduce((sum, book) => sum + parseInt(book.copies_total), 0);
+                    const totalAvailable = data.reduce((sum, book) => sum + parseInt(book.copies_available), 0);
+
+                    document.getElementById("totalBookCard").textContent = totalCopies;
+                    document.getElementById("borrowedBooksCard").textContent = totalCopies - totalAvailable;
+
+                })
+                .catch(error => {
+                    console.error("Error fetching books:", error);
+                });
         });
     }
 
+    // Members button and fetching members logic
     if (membersBtn) {
         membersBtn.addEventListener("click", function (e) {
             e.preventDefault();
@@ -125,45 +162,87 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Add Member form
-    if (addMemberBtn) {
-        addMemberBtn.addEventListener("click", function () {
-            addMemberForm.style.display = "block";
-            wrapper.style.opacity = "0.1";
-        });
-    }
+        // Add Member form
+        if (addMemberBtn) {
+            addMemberBtn.addEventListener("click", function () {
+                addMemberForm.style.display = "block";
+                wrapper.style.opacity = "0.1";
+            });
+        }
 
-    if (addMemberCancelBtn) {
-        addMemberCancelBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            addMemberForm.style.display = "none";
-            wrapper.style.opacity = "1";
-        });
-    }
+        if (addMemberCancelBtn) {
+            addMemberCancelBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                addMemberForm.style.display = "none";
+                wrapper.style.opacity = "1";
+            });
+        }
 
-    // Clear Fine form
-    if (clearBalanceBtn) {
+        // Clear Fine form
+        if (clearBalanceBtn) {
         clearBalanceBtn.addEventListener("click", function () {
             clearFineForm.style.display = "block";
             wrapper.style.opacity = "0.1";
         });
-    }
+        }
 
-    if (clearBalanceCancelBtn) {
+        if (clearBalanceCancelBtn) {
         clearBalanceCancelBtn.addEventListener("click", function (e) {
             e.preventDefault();
             clearFineForm.style.display = "none";
             wrapper.style.opacity = "1";
         });
-    }
+        }
 
-    // Logout
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", function () {
-            window.location.href = "../logout.php";
-        });
-    }
+        // Logout
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", function () {
+                window.location.href = "../logout.php";
+            });
+        }
 
+        // Initial load of dashboard data
+        function loadDashboardData() {
+
+    // Load Books 
+        fetch("/CAT2/Night-learners/staff/books/view_books.php")
+            .then(res => res.json())
+            .then(data => {
+                console.log("Books data:", data);
+                const totalCopies = data.reduce((sum, b) => sum + parseInt(b.copies_total), 0);
+                const totalAvailable = data.reduce((sum, b) => sum + parseInt(b.copies_available), 0);
+
+                document.getElementById("totalBookCard").textContent = totalCopies;
+                document.getElementById("borrowedBooksCard").textContent = totalCopies - totalAvailable;
+            })
+            .catch(err => console.error("Books load error:", err));
+
+
+        //Load Members
+        fetch("/CAT2/Night-learners/members/view_members.php")
+            .then(res => res.json())
+            .then(data => {
+                console.log("Members data:", data);
+                document.getElementById("activeMembersCard").textContent = data.length;
+            })
+            .catch(err => console.error("Members load error:", err));
+
+
+            // Load Fines
+            fetch("/CAT2/Night-learners/fines/view_fines.php")
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Fines data:", data);
+                    const totalFines = data.reduce((sum, f) => sum + parseInt(f.amount), 0);
+                    document.getElementById("totalFinesCard").textContent = totalFines;
+                })
+                .catch(err => console.error("Fines load error:", err));
+            }
     }
+    loadDashboardData();
+
+
+
+    //refesh the page on clicking dashboard 
 
 });
