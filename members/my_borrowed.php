@@ -23,7 +23,7 @@ $records = $conn->query($query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Borrowed Books | Member</title>
-    <link rel="stylesheet" href="<?= base_url('assets/css/member_dashboard.css'); ?>">
+    <link rel="stylesheet" href="../assets/css/member_dashboard.css">
 </head>
 <body>
 

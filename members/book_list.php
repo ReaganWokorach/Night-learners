@@ -37,7 +37,7 @@ $username = $_SESSION['username'];
 <head>
     <meta charset="UTF-8">
     <title>Available Books | Member Portal</title>
-    <link rel="stylesheet" href="<?= base_url('assets/css/member_dashboard.css'); ?>">
+    <link rel="stylesheet" href="../assets/css/member_dashboard.css">
 </head>
 <body>
 

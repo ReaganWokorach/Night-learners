@@ -45,7 +45,7 @@ $records = $conn->query($query);
 <head>
     <meta charset="UTF-8">
     <title>Borrowed Books</title>
-    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard.css') ?>">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
 </head>
 <body>
 

@@ -28,7 +28,7 @@ $borrowed_books = $conn->query($borrow_query);
 <head>
     <meta charset="UTF-8">
     <title>Member Dashboard | Cavendish Library</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/member_dashboard.css'); ?>">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
 <body>
 

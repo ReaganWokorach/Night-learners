@@ -52,7 +52,7 @@ $fines = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fines | Staff Dashboard</title>
-    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard.css') ?>">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
 </head>
 <body>
     <?php include('../layout/sidebar.php'); ?>

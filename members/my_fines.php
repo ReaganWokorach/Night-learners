@@ -24,7 +24,7 @@ $fines = $conn->query($query);
 <head>
     <meta charset="UTF-8">
     <title>My Fines | Member</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/member_dashboard.css'); ?>">
+    <link rel="stylesheet" href="../assets/css/member_dashboard.css">
 </head>
 <body>
 

@@ -15,8 +15,8 @@ $books = $conn->query("SELECT id, title, author, copies_available FROM books WHE
 <head>
     <meta charset="UTF-8">
     <title>Borrow Book</title>
-    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/forms.css'); ?>">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
 </head>
 <body>
 
