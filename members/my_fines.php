@@ -2,7 +2,7 @@
 include('../includes/member_auth.php');
 include('../db_connect.php');
 include('../includes/path_helper.php');
-
+// protecting user sessions
 $member_id = $_SESSION['member_id'];
 $username = $_SESSION['username'];
 
@@ -42,9 +42,14 @@ $fines = $conn->query($query);
 <!-- Top Navigation Bar -->
 <div class="topnav">
     <h1>💰 My Fines</h1>
-     <div class="user-right">
+    <div class="topnav">
+        <span class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</span>
+        <h1>Cavendish Library Dashboard</h1>
+
+        <div class="user-right">
         <span class="user-label">👤 <?= htmlspecialchars($_SESSION['username']); ?></span>
         <a href="../logout.php" class="logout-btn">Logout</a>
+        </div>
     </div>
 </div>
 

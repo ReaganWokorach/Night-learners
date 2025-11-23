@@ -45,6 +45,7 @@ $borrowed_books = $conn->query($borrow_query);
 
 <!--Top Navigation Bar -->
 <div class="topnav">
+    <span class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</span>
     <h1>Cavendish Library Dashboard</h1>
 
     <div class="user-right">

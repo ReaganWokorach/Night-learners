@@ -1,4 +1,3 @@
-
 <?php
 include('../includes/member_auth.php');
 include('../db_connect.php');
@@ -50,14 +49,13 @@ $username = $_SESSION['username'];
         <li><a class="active" href="book_list.php">📚 Browse Books</a></li>
         <li><a href="my_borrowed.php">📖 My Borrowed Books</a></li>
         <li><a href="my_fines.php">💰 My Fines</a></li>
-       
     </ul>
 </div>
 
 <!-- Top Navigation Bar -->
 <div class="topnav">
     <h1>📚 Available Books</h1>
-     <div class="user-right">
+    <div class="user-right">
         <span class="user-label">👤 <?= htmlspecialchars($_SESSION['username']); ?></span>
         <a href="../logout.php" class="logout-btn">Logout</a>
     </div>

@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['username'] = $staff['username'];
                 $_SESSION['role'] = 'staff';
 
-                header("Location: staff/Admin_dashboard.html");
+                header("Location: staff/dashboard.php");
                 exit();
             } else {
                 // Staff password incorrect

@@ -1,5 +1,5 @@
 <?php
-//authentication of the sessions ==== aditional dashbaord protection
+//includes/auth_check.php
 session_start();
 
 if (!isset($_SESSION['staff_id'])) {

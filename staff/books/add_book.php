@@ -1,36 +1,82 @@
 <?php
-session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'staff') {
-    header('Location: admin_login.php');
-    exit();
-}
+include('../../includes/staff_auth.php');
+include('../../db_connect.php');
+include('../../includes/path_helper.php');
+include('../../includes/csrf.php');
 
-// Add books to the DB
+$message = "";
+$token = generate_csrf_token();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = trim($_POST['title']);
-    $author = trim($_POST['author']);
-    $isbn = trim($_POST['isbn']);
-    $category = trim($_POST['category']);
-    $copies = intval($_POST['copies']);
+    if (verify_csrf_token($_POST['csrf_token'])) {
 
-    if (empty($title) || empty($author) || empty($isbn) || empty($category) || $copies <= 0) {
-        echo "All fields are required and number of copies must be greater than zero.";
-    } else {
-        include('../../db_connect.php');
+        $isbn = trim($_POST['isbn']);
+        $title = trim($_POST['title']);
+        $author = trim($_POST['author']);
+        $category = trim($_POST['category']);
+        $copies_total = intval($_POST['copies_total']);
 
-        $stmt = $conn->prepare("INSERT INTO books (isbn, title, author, category, copies_total, copies_available) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssii", $isbn, $title, $author, $category, $copies, $copies);
+        $stmt = $conn->prepare("
+            INSERT INTO books (isbn, title, author, category, copies_total, copies_available)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ");
+        $stmt->bind_param("ssssii", $isbn, $title, $author, $category, $copies_total, $copies_total);
 
         if ($stmt->execute()) {
-            // Correct path if this file is inside 'staff/'
-            header("Location: ../Admin_dashboard.html");
-            exit();
+            $message = "<div class='success'>✔ Book added successfully.</div>";
         } else {
-            echo "Error: " . $stmt->error;
+            $message = "<div class='error'>❌ Error adding book.</div>";
         }
 
-        $stmt->close();
-        $conn->close();
+    } else {
+        $message = "<div class='error'>⚠ Invalid CSRF Token.</div>";
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/forms.css') ?>">
+</head>
+<body>
+
+<?php include('../layout/sidebar.php'); ?>
+<?php include('../layout/topnav.php'); ?>
+
+<div class="main-content">
+
+    <h2>Add New Book</h2>
+    <?= $message ?>
+
+    <div class="form-container">
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= $token ?>">
+
+            <label>ISBN</label>
+            <input type="text" name="isbn" required>
+
+            <label>Title</label>
+            <input type="text" name="title" required>
+
+            <label>Author</label>
+            <input type="text" name="author" required>
+
+            <label>Category</label>
+            <input type="text" name="category" required>
+
+            <label>Total Copies</label>
+            <input type="number" name="copies_total" min="1" required>
+
+            <button type="submit">Add Book</button>
+        </form>
+
+        <a href="view_books.php" class="back-link">← Back to Books</a>
+    </div>
+
+</div>
+
+</body>
+</html>
