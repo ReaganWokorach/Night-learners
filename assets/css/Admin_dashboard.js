@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("Admin Dashboard JS loaded");
     // Main wrapper and sections
     const wrapper = document.getElementById("wrapper");
     const mainDiv = document.getElementById("mainDiv");
@@ -9,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const addBookForm = document.getElementById("addBookForm");
     const addMemberForm = document.getElementById("addMemberForm");
     const clearFineForm = document.getElementById("clearFine");
-    const memberTableBody = document.getElementById("memberTableBody");
+    // const memberTableBody = document.getElementById("memberTableBody");
 
     // Buttons
     const booksBtn = document.getElementById("booksBtn");
@@ -66,11 +67,14 @@ document.addEventListener("DOMContentLoaded", function () {
             hideAllSections();
             showSection(membersDiv, false, true, false);
             // Fetch and display members
+            const memberTableBody = document.getElementById("memberTableBody");
             memberTableBody.innerHTML = ""; // Clear existing data
-            fetch("../members/view_members.php")
+            fetch("/CAT2/Night-learners/members/view_members.php")
                 .then(response => response.json())
                 .then(data => {
+                    console.log("Fetched members:", data);
                     data.forEach(member => {
+                        console.log("Member:", member);
                         const row = document.createElement("tr");
                         row.innerHTML = `
                             <td>${member.id}</td>
@@ -79,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <td>${member.email}</td>
                             <td>${member.phone}</td>
                             <td>${member.status}</td>
-                            <td>${member.creation_date}</td>
+                            <td>${member.created_at}</td>
                         `;
                         memberTableBody.appendChild(row);
                     });

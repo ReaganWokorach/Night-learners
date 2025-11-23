@@ -8,7 +8,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'staff') {
 
 include('../db_connect.php'); // adjust path if needed
 
-$result = $conn->query("SELECT member_id, reg_no, full_name, email, phone, status, created_at FROM members ORDER BY member_id DESC");
+$result = $conn->query("SELECT id, reg_no, full_name, email, phone, status, created_at FROM members ORDER BY reg_no ASC");
 
 $members = [];
 

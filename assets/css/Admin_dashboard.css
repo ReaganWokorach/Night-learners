@@ -130,14 +130,6 @@ li{
   color: white;
 }
 
-
-#booksDiv table, #membersDiv table, #borrowDiv table, #finesDiv table {
-    width: 100%; 
-    border-collapse: collapse;
-    border: none;
-    table-layout: auto; 
-}
-
 #booksDiv, #membersDiv, #borrowDiv, #finesDiv {
     width: 100%;
     overflow-x: auto; 
@@ -295,4 +287,42 @@ li{
     color: #003b5c;
     border: #003b5c 2px solid;
 }
+/* Table styles for better readability and aesthetics */
+#booksDiv table, #membersDiv table, #borrowDiv table, #finesDiv table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+/* Table header styles */
+thead th {
+    background-color: #003b5c;
+    color: white;
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid black; /* Ensure header cell borders show */
+}
+
+/* Table body cells */
+tbody td {
+    padding: 12px 15px;
+    text-align: center;
+    color: #333;
+    border: 1px solid black; /* Ensure body cell borders show */
+}
+
+/* Table body rows */
+tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for rows */
+tbody tr:hover {
+    background-color: gray;
+}
+
+/* Optional: Zebra striping for readability */
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
