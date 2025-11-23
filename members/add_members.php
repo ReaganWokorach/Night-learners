@@ -16,23 +16,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = trim($_POST['password']);
     $role = trim($_POST['role']);
 
-    //check for empty fields
+    // Check for empty fields
     if (empty($reg_no) || empty($full_name) || empty($email) || empty($phone) || empty($status) ||
-    empty($username) || empty($password) || empty($role)) {
+        empty($username) || empty($password) || empty($role)) {
         echo "All fields are required.";
     } else {
+
+        // Validate email format
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "Invalid email address.";
+            exit();
+        }
+
+        // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         // Database connection
-        //include('../../db_connect.php');
         include('../db_connect.php');
 
-        $stmt = $conn->prepare("INSERT INTO members (reg_no, full_name, email, phone, status, username, password, role) VALUES (?, ?, ?, ?, ?,?,?,?)");
-        $stmt->bind_param("ssssssss", $reg_no, $full_name, $email, $phone, $status, $username, $password, $role);
+        // Insert into SQL (use hashed password!)
+        $stmt = $conn->prepare("INSERT INTO members (reg_no, full_name, email, phone, status, username, password, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssss", $reg_no, $full_name, $email, $phone, $status, $username, $hashed_password, $role);
 
         if ($stmt->execute()) {
-            // Correct path if this file is inside 'staff/'
-            // header("Location: ../Admin_dashboard.html");
             header("Location: ../staff/Admin_dashboard.html");
-
             exit();
         } else {
             echo "Error: " . $stmt->error;
@@ -41,6 +48,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
         $conn->close();
     }
-    
 }
 ?>
