@@ -76,25 +76,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Library System Login | Cavendish University</title>
-  <link rel="stylesheet" href="assets/css/form.css" />
+    <meta charset="UTF-8">
+    <title>Library Login | Cavendish University</title>
+    <link rel="stylesheet" href="assets/css/forms.css">
 </head>
 <body>
-  <div class="login-container">
-    <img src="cavendish_logo.png" alt="Cavendish University Logo" class="logo" />
-        <h1><b>Library System Login</b></h1>
-     <?php if ($error): ?>
+    <div class="login-container">
+        <!---University Logo -->
+        <div class="logo-area">
+            <img src="assets/images/cuulogo.png" alt="Cavendish University Logo">
+        </div>
+
+        <h2>Library System Login</h2>
+        <?php if ($error): ?>
             <div class="error"><?= htmlspecialchars($error) ?></div>
-        <?php endif; ?>   
-    <form class="login-form" method="POST">
-      <h3>Username</h3>
-      <input type="text" placeholder="Enter username" name="username" required/>
-      <h3>Password</h3>
-      <input type="password" placeholder="Enter password" name="password" required />
-      <button type="submit">Login</button>
-    </form>
-  </div>
+        <?php endif; ?>
+        <form method="POST" action="">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Enter username">
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password">
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
 </body>
 </html>
