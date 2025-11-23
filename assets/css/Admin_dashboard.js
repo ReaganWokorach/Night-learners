@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const addBookForm = document.getElementById("addBookForm");
     const addMemberForm = document.getElementById("addMemberForm");
     const clearFineForm = document.getElementById("clearFine");
+    const memberTableBody = document.getElementById("memberTableBody");
 
     // Buttons
     const booksBtn = document.getElementById("booksBtn");
@@ -64,8 +65,29 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();
             hideAllSections();
             showSection(membersDiv, false, true, false);
+            // Fetch and display members
+            memberTableBody.innerHTML = ""; // Clear existing data
+            fetch("../members/view_members.php")
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(member => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${member.id}</td>
+                            <td>${member.reg_no}</td>
+                            <td>${member.full_name}</td>
+                            <td>${member.email}</td>
+                            <td>${member.phone}</td>
+                            <td>${member.status}</td>
+                            <td>${member.creation_date}</td>
+                        `;
+                        memberTableBody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error fetching members:", error);
         });
-    }
+    });
 
     if (borrowBtn) {
         borrowBtn.addEventListener("click", function (e) {
@@ -138,7 +160,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Initially show main dashboard
-    // hideAllSections();
-    // mainDiv.style.display = "block";
+    }
+
 });
