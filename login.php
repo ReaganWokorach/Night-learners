@@ -1,68 +1,78 @@
 <?php
 session_start();
-include ('db_connect.php');
+include('db_connect.php');
 
 $error = '';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-
-    if(empty($username) || empty($password)){
+    if (empty($username) || empty($password)) {
         $error = "Please enter both username and password.";
     } else {
-        // staff login check 
-        $stmt = $conn-> prepare("SELECT * FROM staff WHERE username = ?");
-        $stmt-> bind_param("s", $username);
-        $stmt-> execute();
 
+        // ============================
+        // STAFF LOGIN CHECK
+        // ============================
+        $stmt = $conn->prepare("SELECT * FROM staff WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
         $staffResult = $stmt->get_result();
 
-        if($staffResult->num_rows === 1){
+        if ($staffResult->num_rows === 1) {
             $staff = $staffResult->fetch_assoc();
 
-            if(password_verify($password, $staff['password'])){
+            if (password_verify($password, $staff['password'])) {
+                // Successful staff login
                 $_SESSION['staff_id'] = $staff['id'];
                 $_SESSION['username'] = $staff['username'];
-                $_SESSION['role']      = 'staff';
+                $_SESSION['role'] = 'staff';
 
                 header("Location: staff/Admin_dashboard.html");
                 exit();
-        }
-            }else{
-                $error = "Invalid Password";
-            }
-        }
-        $stmt->close();
-// member login check 
-
-        $stmt2 = $conn->prepare("SELECT * FROM members WHERE username = ?");
-        $stmt2->bind_param("s", $username);
-        $stmt2->execute();
-        $memberResult = $stmt2->get_result();
-
-        if ($memberResult->num_rows === 1) {
-            $member = $memberResult->fetch_assoc();
-
-            if(password_verify($password, $member['password']))
-                {
-                $_SESSION['member_id'] = $member['id'];
-                $_SESSION['username'] = $member['username'];
-                $_SESSION['role'] = 'member';
-
-                header("Location: members/dashboard.php");
-                exit();
             } else {
+                // Staff password incorrect
                 $error = "Invalid password.";
             }
+
         } else {
-            $error = "No user found with that username.";
+            // No staff with that username → TRY MEMBER LOGIN
+            // ============================
+            // MEMBER LOGIN CHECK
+            // ============================
+            $stmt2 = $conn->prepare("SELECT * FROM members WHERE username = ?");
+            $stmt2->bind_param("s", $username);
+            $stmt2->execute();
+            $memberResult = $stmt2->get_result();
+
+            if ($memberResult->num_rows === 1) {
+                $member = $memberResult->fetch_assoc();
+
+                if (password_verify($password, $member['password'])) {
+                    // Successful member login
+                    $_SESSION['member_id'] = $member['id'];
+                    $_SESSION['username'] = $member['username'];
+                    $_SESSION['role'] = 'member';
+
+                    header("Location: members/dashboard.php");
+                    exit();
+                } else {
+                    $error = "Invalid password.";
+                }
+            } else {
+                $error = "No user found with that username.";
+            }
+            $stmt2->close();
         }
-        $stmt2->close();
+
+        $stmt->close();
     }
-$conn->close();
+
+    $conn->close();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
