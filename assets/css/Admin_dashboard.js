@@ -244,5 +244,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     //refesh the page on clicking dashboard 
+    if (dashboardBtn) {
+        dashboardBtn.addEventListener("click", function (e) {
+            e.preventDefault(); // Prevent default link navigation
+            location.reload();   // Safely reload the page
+        });
+    }
 
 });
